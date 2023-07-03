@@ -37,3 +37,29 @@ def read_mnist(datapath="./data", split_fraction=None):
     training_data, validation_data = tud.random_split(training_data, split_fraction)
 
     return training_data, validation_data, test_data
+
+
+def read_fashion_mnist(datapath="./data", split_fraction=None):
+    """
+    Read Fashion-MNIST data
+    """
+    if split_fraction is None:
+        split_fraction = [0.8, 0.2]
+
+    training_data = datasets.FashionMNIST(
+        root=datapath,
+        train=True,
+        download=True,
+        transform=ToTensor()
+    )
+
+    test_data = datasets.FashionMNIST(
+        root=datapath,
+        train=False,
+        download=True,
+        transform=ToTensor()
+    )
+
+    training_data, validation_data = tud.random_split(training_data, split_fraction)
+
+    return training_data, validation_data, test_data
